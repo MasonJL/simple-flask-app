@@ -1,5 +1,7 @@
-from flask import Flask
+from flask import Flask, render_template, request
 import logging
+import requests
+import json
 
 flask_app = Flask(__name__)
 
@@ -22,7 +24,14 @@ logger.addHandler(fh)
 
 @flask_app.route('/')
 def homepage():
-    return "Hi everyone"
+    return render_template("index.html")
+
+
+@flask_app.route('/<dog_breed>')
+def show_dog(dog_breed):
+	response = requests.get("https://dog.ceo/api/breed/{}/images/random".format(dog_breed))
+	image_url = response.json()["message"]
+	return render_template("displaydog.html", image_url=image_url)
 
 
 
