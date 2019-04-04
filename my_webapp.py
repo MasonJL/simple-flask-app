@@ -22,7 +22,7 @@ logger.addHandler(fh)
 
 @flask_app.route('/')
 def homepage():
-    return "Hello Friends"
+    return "Hi everyone"
 
 
 
